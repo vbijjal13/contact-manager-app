@@ -26,6 +26,18 @@ const RegisterPage: React.FC = () => {
     const { name, value } = e.target;
     setForm((p) => ({ ...p, [name]: value }));
     setFieldErrors((errs) => ({ ...errs, [name as keyof RegisterForm]: undefined }));
+
+    // Live field-level validation as user types
+    if (name === "email") {
+      setFieldErrors((errs) => ({ ...errs, email: isValidEmail(value) ? undefined : "Please enter a valid email address." }));
+    }
+    if (name === "password") {
+      // clear confirmPassword error if passwords match after typing
+      setFieldErrors((errs) => ({ ...errs, confirmPassword: form.confirmPassword && value === form.confirmPassword ? undefined : errs.confirmPassword }));
+    }
+    if (name === "confirmPassword") {
+      setFieldErrors((errs) => ({ ...errs, confirmPassword: value === form.password ? undefined : "Passwords do not match." }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -131,6 +143,35 @@ const RegisterPage: React.FC = () => {
             {fieldErrors.password && (
               <p className="mt-1 text-sm text-red-400">{fieldErrors.password}</p>
             )}
+
+            {/* live password rule hints */}
+            <ul className="mt-2 space-y-1 text-sm">
+              {(() => {
+                const pw = form.password || "";
+                const checks = {
+                  length: pw.trim().length >= 8,
+                  letter: /[A-Za-z]/.test(pw),
+                  number: /\d/.test(pw),
+                  special: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(pw),
+                };
+                return (
+                  <>
+                    <li className={checks.length ? "text-green-400" : "text-red-400"}>
+                      {checks.length ? "✓" : "✕"} minimum 8 characters
+                    </li>
+                    <li className={checks.letter ? "text-green-400" : "text-red-400"}>
+                      {checks.letter ? "✓" : "✕"} at least one letter
+                    </li>
+                    <li className={checks.number ? "text-green-400" : "text-red-400"}>
+                      {checks.number ? "✓" : "✕"} at least one number
+                    </li>
+                    <li className={checks.special ? "text-green-400" : "text-red-400"}>
+                      {checks.special ? "✓" : "✕"} at least one special character
+                    </li>
+                  </>
+                );
+              })()}
+            </ul>
           </label>
 
           <label className="block">
