@@ -1,0 +1,78 @@
+"use client";
+
+import React, { useState } from "react";
+import { isValidEmail } from "../_helpers/validator";
+
+type LoginForm = {
+  email: string;
+  password: string;
+};
+
+const LoginPage: React.FC = () => {
+  const [form, setForm] = useState<LoginForm>({ email: "", password: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Validate email format before proceeding
+    if (!isValidEmail(form.email)) {
+      // don't proceed with invalid email
+      console.error("Invalid email format:", form.email);
+      return;
+    }
+
+    // On submit, console the current form data
+    console.log("Login submit:", form);
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-black text-white rounded-lg shadow-2xl p-8">
+        <h1 className="text-2xl font-semibold mb-6">Login</h1>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <label className="block">
+            <span className="text-sm font-medium">Email</span>
+            <input
+              className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              required
+            />
+          </label>
+
+          <label className="block">
+            <span className="text-sm font-medium">Password</span>
+            <input
+              className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              required
+            />
+          </label>
+
+          <div className="pt-4">
+            <button
+              type="submit"
+              className="w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;

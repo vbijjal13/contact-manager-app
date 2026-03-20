@@ -1,12 +1,14 @@
 {
   "name": "contact-manager-app",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node ./test/runValidatorsTest.js"
   },
   "dependencies": {
     "next": "16.2.0",
