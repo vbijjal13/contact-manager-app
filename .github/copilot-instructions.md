@@ -19,7 +19,7 @@
   - Tailwind is used; global styles in `src/app/globals.css`.
   - Important files: `src/app/layout.tsx`, `src/app/page.tsx`, `src/app/register/page.tsx`, `src/app/login/page.tsx`.
   - Shared helpers/components:
-    - Validators: `src/app/_helpers/validator.ts` (email/password validation)
+    - Validators: `src/app/_lib/validator.ts` (email/password validation)
     - Icons: `src/app/_components/Icons.tsx` (Eye/EyeOff)
 
   # Scripts (use these exact commands)

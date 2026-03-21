@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { isValidEmail, isValidPassword } from "@/app/helpers/validator";
+import { isValidEmail, isValidPassword } from "@/app/_lib/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
 
 type RegisterFormType = {

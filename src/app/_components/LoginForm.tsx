@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { isValidEmail } from "@/app/helpers/validator";
+import { isValidEmail } from "@/app/_lib/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
 import { useRouter } from "next/navigation";
 
