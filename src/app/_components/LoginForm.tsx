@@ -48,6 +48,7 @@ const LoginForm: React.FC = () => {
         setTimeout(() => {
           setLoading(false);
           router.push('/contact');
+          router.refresh();
         }, 1500);
       } else {
         const error = data?.error || 'Login failed with unknown error.';

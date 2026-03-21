@@ -1,5 +1,8 @@
+"use server";
+
 import type { UserType } from '@/app/_types/types';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function setUserSession(user: UserType) {
     const cookieStore = await cookies();
@@ -24,4 +27,5 @@ export async function clearUserSession() {
     const cookieStore = await cookies();
     // cookieStore.delete accepts either the cookie name or an options object
     cookieStore.delete({ name: 'user', path: '/' });
+    redirect('/login');
 }

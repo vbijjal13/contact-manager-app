@@ -21,6 +21,7 @@
   - Shared helpers/components:
     - Validators: `src/app/_lib/validator.ts` (email/password validation)
     - Icons: `src/app/_components/Icons.tsx` (Eye/EyeOff)
+    - LogoutButton: `src/app/_components/LogoutButton.tsx` (client component for logout)
 
   # Scripts (use these exact commands)
   - Development: `npm run dev` (Next dev on http://localhost:3000)
