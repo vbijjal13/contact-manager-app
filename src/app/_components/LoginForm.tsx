@@ -1,9 +1,9 @@
 "use client";
-
 import React, { useState } from "react";
-import { isValidEmail } from "../_helpers/validator";
+import { isValidEmail } from "@/app/helpers/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
 import { loginAction } from "../_actions/auth";
+import { useRouter } from "next/navigation";
 
 type LoginFormType = {
   email: string;
@@ -13,6 +13,10 @@ type LoginFormType = {
 const LoginForm: React.FC = () => {
   const [form, setForm] = useState<LoginFormType>({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,14 +25,45 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // reset messages and start loader
+    setErrorMessage(null);
+    setSuccessMessage(null);
     if (!isValidEmail(form.email)) {
-      console.error("Invalid email format:", form.email);
+      setErrorMessage("Invalid email format");
       return;
     }
-    loginAction({
+
+    setLoading(true);
+    try {
+      const res = await loginAction({
         email: form.email,
-        password: form.password
-    });
+        password: form.password,
+      });
+
+      // server action returns a Response-like object; attempt to parse
+      //const data = await (res?.json ? res.json() : Promise.resolve(res));
+      console.log("Login response:", res);
+    //   return; // Debug log to inspect response structure
+    //   if (res?.status === 200) {
+    //     const userName = data?.user?.name || "User";
+    //     setSuccessMessage(`Welcome ${userName}`);
+    //     // show welcome briefly then navigate
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //       router.push("/contact");
+    //     }, 1500);
+    //   } else {
+    //     const error = data?.error || "Login failed with unknown error.";
+    //     setErrorMessage(error);
+    //     setLoading(false);
+    //   }
+    } catch (err) {
+      // Log the error for debugging and show a generic message to the user
+      // eslint-disable-next-line no-console
+      console.error("err", err);
+      setErrorMessage("Login failed. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,12 +105,16 @@ const LoginForm: React.FC = () => {
           </div>
         </label>
 
+        {errorMessage && <div className="text-red-400 text-sm">{errorMessage}</div>}
+        {successMessage && <div className="text-green-400 text-sm">{successMessage}</div>}
+
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition"
+            disabled={loading}
+            className={`w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </div>
       </form>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isValidEmail, isValidPassword } from '../src/app/_helpers/validator'
+import { isValidEmail, isValidPassword } from '../src/app/helpers/validator'
 
 describe('validators', () => {
   it('validates emails correctly', () => {
