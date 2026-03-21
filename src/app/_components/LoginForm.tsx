@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { isValidEmail } from "@/app/helpers/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
-import { loginAction } from "../_actions/auth";
 import { useRouter } from "next/navigation";
 
 type LoginFormType = {
@@ -35,32 +34,28 @@ const LoginForm: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await loginAction({
-        email: form.email,
-        password: form.password,
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, password: form.password }),
       });
 
-      // server action returns a Response-like object; attempt to parse
-      //const data = await (res?.json ? res.json() : Promise.resolve(res));
-      console.log("Login response:", res);
-    //   return; // Debug log to inspect response structure
-    //   if (res?.status === 200) {
-    //     const userName = data?.user?.name || "User";
-    //     setSuccessMessage(`Welcome ${userName}`);
-    //     // show welcome briefly then navigate
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //       router.push("/contact");
-    //     }, 1500);
-    //   } else {
-    //     const error = data?.error || "Login failed with unknown error.";
-    //     setErrorMessage(error);
-    //     setLoading(false);
-    //   }
+      const data = await res.json();
+
+      if (res.ok) {
+        const userName = data?.user?.name || 'User';
+        setSuccessMessage(`Welcome ${userName}`);
+        setTimeout(() => {
+          setLoading(false);
+          router.push('/contact');
+        }, 1500);
+      } else {
+        const error = data?.error || 'Login failed with unknown error.';
+        setErrorMessage(error);
+        setLoading(false);
+      }
     } catch (err) {
-      // Log the error for debugging and show a generic message to the user
-      // eslint-disable-next-line no-console
-      console.error("err", err);
+      console.error("Login error", err);
       setErrorMessage("Login failed. Please try again.");
       setLoading(false);
     }
