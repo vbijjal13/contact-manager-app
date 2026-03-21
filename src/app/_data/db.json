@@ -33,6 +33,5 @@
       "name": "Bob Brown",
       "email": "bob.brown@example.com"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
