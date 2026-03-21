@@ -19,7 +19,7 @@ export default function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen bg-slate-100">
           <Navbar />
-        <main className="px-4 py-8 container mx-auto">
+        <main className="py-8 container mx-auto grow flex flex-col">
           {children}
         </main>
         </div>
