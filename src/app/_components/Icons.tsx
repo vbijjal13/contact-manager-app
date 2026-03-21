@@ -15,5 +15,3 @@ export const EyeOffIcon: React.FC<SVGProps> = ({ className = "h-5 w-5", ...props
     <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M1 1l22 22" />
   </svg>
 );
-
-export default { EyeIcon, EyeOffIcon };

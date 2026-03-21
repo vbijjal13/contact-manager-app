@@ -14,4 +14,3 @@ export function isValidPassword(password: string): boolean {
   return hasLetter && hasDigit && hasSpecial;
 }
 
-export default { isValidEmail, isValidPassword };
