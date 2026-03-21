@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { isValidEmail } from "../_helpers/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
+import { loginAction } from "../_actions/auth";
 
 type LoginFormType = {
   email: string;
@@ -18,20 +19,20 @@ const LoginForm: React.FC = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValidEmail(form.email)) {
       console.error("Invalid email format:", form.email);
       return;
     }
-    console.log("Login submit:", form);
+    loginAction({
+        email: form.email,
+        password: form.password
+    });
   };
 
   return (
-    <div className="w-full max-w-md bg-black text-white rounded-lg shadow-2xl p-8">
-      <h1 className="text-2xl font-semibold mb-6">Login</h1>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
+     <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block">
           <span className="text-sm font-medium">Email</span>
           <input
@@ -78,7 +79,6 @@ const LoginForm: React.FC = () => {
           </button>
         </div>
       </form>
-    </div>
   );
 };
 

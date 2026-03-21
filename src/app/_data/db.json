@@ -1,0 +1,30 @@
+{
+    "users": [
+        {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "userId": "1",
+        "password": "Password@123"
+        },
+        {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "userId": "2",
+        "password": "Password@123"
+        }
+    ],
+    "contacts": [
+        {
+        "id": 1,
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com"
+        },
+        {   
+        "id": 2,
+        "name": "Bob Brown",
+        "email": "bob.brown@example.com"
+        }
+    ]
+}
