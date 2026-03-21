@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { isValidEmail, isValidPassword } from "@/app/_lib/validator";
 import { EyeIcon, EyeOffIcon } from "./Icons";
+import { useRouter } from "next/navigation";
 
 type RegisterFormType = {
   firstName: string;
@@ -23,6 +24,10 @@ const RegisterForm: React.FC = () => {
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof RegisterFormType, string>>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,8 +45,11 @@ const RegisterForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // reset messages and start loader
+    setErrorMessage(null);
+    setSuccessMessage(null);
 
     const errors: Partial<Record<keyof RegisterFormType, string>> = {};
 
@@ -68,13 +76,38 @@ const RegisterForm: React.FC = () => {
       return;
     }
 
-    const toSubmit = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      password: form.password,
-    };
-    console.log("Register submit:", toSubmit);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          password: form.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        const userName = data?.user?.name || 'User';
+        setSuccessMessage(`Welcome ${userName}! Registration successful.`);
+        setTimeout(() => {
+          setLoading(false);
+          router.push('/contact');
+        }, 1500);
+      } else {
+        const error = data?.error || 'Registration failed with unknown error.';
+        setErrorMessage(error);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error("Registration error", err);
+      setErrorMessage("Registration failed. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -202,12 +235,16 @@ const RegisterForm: React.FC = () => {
           {fieldErrors.confirmPassword && <p className="mt-1 text-sm text-red-400">{fieldErrors.confirmPassword}</p>}
         </label>
 
+        {errorMessage && <div className="text-red-400 text-sm">{errorMessage}</div>}
+        {successMessage && <div className="text-green-400 text-sm">{successMessage}</div>}
+
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition"
+            disabled={loading}
+            className={`w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            Register
+            {loading ? 'Registering...' : 'Register'}
           </button>
         </div>
       </form>
