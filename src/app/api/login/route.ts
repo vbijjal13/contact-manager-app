@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
-import { use } from 'react';
+import { setUserSession } from '@/app/_lib/session';
 
 const API_URL = process.env.API_URL || 'http://localhost:3001';
 
@@ -16,17 +16,9 @@ export async function POST(req: Request) {
     }
 
     const userResponse = { userid: user.userid, name: user.name, email: user.email, id: user.userid };
-
+    
+    await setUserSession(userResponse);
     const res = NextResponse.json({ success: true, user: userResponse }, { status: 200 });
-    // set cookie on the response
-    res.cookies.set('user', JSON.stringify(userResponse), {
-      maxAge: 7 * 24 * 60 * 60,
-      path: '/',
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-    });
-
     return res;
   } catch (err) {
     console.error('Login route error', err);
