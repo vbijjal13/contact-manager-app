@@ -62,7 +62,7 @@ export default function Popover({ type, message, isVisible, onClose, duration = 
 
         <div className="p-4">
           <div className="flex items-start">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               {isSuccess ? (
                 <CheckCircleIcon className="h-6 w-6 text-green-400" />
               ) : (
@@ -77,7 +77,7 @@ export default function Popover({ type, message, isVisible, onClose, duration = 
                 {message}
               </p>
             </div>
-            <div className="ml-4 flex-shrink-0 flex">
+            <div className="ml-4 shrink-0 flex">
               <button
                 type="button"
                 className={`inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 ${

@@ -32,7 +32,7 @@ export default function Home() {
       </section>
 
       {/* Hero Illustration */}
-      <section className="py-12 px-4 bg-gradient-to-b from-blue-50 to-transparent">
+      <section className="py-12 px-4 bg-linear-to-b from-blue-50 to-transparent">
         <div className="max-w-4xl mx-auto">
           <svg
             viewBox="0 0 400 300"
@@ -138,14 +138,14 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+      <section className="py-16 px-4 bg-linear-to-r from-blue-500 to-blue-600 text-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
             Key Benefits
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 ✓
               </div>
               <div>
@@ -154,7 +154,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 ✓
               </div>
               <div>
@@ -163,7 +163,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 ✓
               </div>
               <div>
@@ -172,7 +172,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 ✓
               </div>
               <div>

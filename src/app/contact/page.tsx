@@ -59,7 +59,7 @@ export default async function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Teaser Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <div className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="mb-6">
