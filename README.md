@@ -26,7 +26,7 @@ A contact manager built with Next.js App Router, React, TypeScript, and Tailwind
 The app uses two layers locally:
 
 1. The Next.js app runs on `http://localhost:3000`
-2. A `json-server` instance runs on `http://localhost:3001` and stores data in [`src/app/_data/db.json`](/d:/Vikas%20Projects/contact-manager-app/src/app/_data/db.json)
+2. A `json-server` instance runs on `http://localhost:3001` and stores data in [`src/app/_data/db.json`](./src/app/_data/db.json)
 
 Runtime flow:
 
