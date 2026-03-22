@@ -63,7 +63,7 @@ export async function updateContact(
 ): Promise<ContactType> {
   try {
     const user = await getUserSession();
-    const body = { ...contact, userId: user?.userid };
+    const body = { ...contact, userId: user?.id };
     const response = await fetch(`${API_BASE_URL}/${contactId}`, {
       method: 'PUT',
       headers: {
@@ -91,7 +91,7 @@ export async function updateContact(
 export async function deleteContact(contactId: string): Promise<void> {
   try {
     const user = await getUserSession();
-    const response = await fetch(`${API_BASE_URL}/${contactId}?userId=${encodeURIComponent(user?.userid || '')}`, {
+    const response = await fetch(`${API_BASE_URL}/${contactId}?userId=${encodeURIComponent(user?.id || '')}`, {
       method: 'DELETE',
     });
 

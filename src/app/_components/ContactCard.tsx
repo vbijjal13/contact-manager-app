@@ -6,6 +6,7 @@ import { deleteContact, formatFullName, formatPhone } from "../_lib/contactServi
 import { EditIcon, CopyIcon, DeleteIcon } from "./Icons";
 import EditContactModal from "./EditContactModal";
 import CopyContactModal from "./CopyContactModal";
+import ConfirmModal from "./ConfirmModal";
 import Popover, { usePopover } from "./Popover";
 
 interface ContactCardProps {
@@ -17,17 +18,20 @@ interface ContactCardProps {
 export default function ContactCard({ contact, onUpdate, onDelete }: ContactCardProps) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCopyModal, setShowCopyModal] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { popover, showError, hidePopover } = usePopover();
 
-  const handleDelete = async () => {
-    if (confirm("Are you sure you want to delete this contact?")) {
-      try {
-        await deleteContact(contact.id);
-        onDelete(contact.id);
-      } catch (error) {
-        console.error("Failed to delete contact:", error);
-        showError("Failed to delete contact. Please try again.");
-      }
+  const handleDeleteConfirm = async () => {
+    setDeleting(true);
+    try {
+      await deleteContact(contact.id);
+      setShowDeleteConfirm(false);
+      onDelete(contact.id);
+    } catch (error) {
+      console.error("Failed to delete contact:", error);
+      showError("Failed to delete contact. Please try again.");
+      setDeleting(false);
     }
   };
 
@@ -51,7 +55,7 @@ export default function ContactCard({ contact, onUpdate, onDelete }: ContactCard
             <CopyIcon className="h-4 w-4" />
           </button>
           <button
-            onClick={handleDelete}
+            onClick={() => setShowDeleteConfirm(true)}
             className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-full transition"
             title="Delete contact"
           >
@@ -90,6 +94,19 @@ export default function ContactCard({ contact, onUpdate, onDelete }: ContactCard
         contact={contact}
         isOpen={showCopyModal}
         onClose={() => setShowCopyModal(false)}
+      />
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showDeleteConfirm}
+        title="Delete Contact"
+        message={`Are you sure you want to delete ${formatFullName(contact.firstName, contact.lastName)}? This action cannot be undone.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDestructive={true}
+        isLoading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setShowDeleteConfirm(false)}
       />
 
       <Popover
