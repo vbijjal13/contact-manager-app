@@ -10,6 +10,7 @@ export async function PUT(
 ) {
   try {
     const { id } = params;
+    console.log('Updating contact with ID:', id);
     const body = await req.json();
     const { userId, firstName, lastName, email, phoneNumber, countryCode } = body;
 
@@ -33,12 +34,15 @@ export async function PUT(
     }
 
     // First, verify the contact exists and belongs to the user
-    const getResponse = await axios.get(`${API_URL}/contacts/${id}`);
-    const existingContact = getResponse.data;
+    const getResponse = await axios.get(`${API_URL}/contacts?id=${id}`);
+    const existingContact = getResponse.data?.[0];
+    console.log('Existing contact data:', existingContact);
 
     if (!existingContact) {
       return NextResponse.json(
-        { error: 'Contact not found' },
+        { error: 'Contact not found',
+            existingContactData: existingContact,
+         },
         { status: 404 }
       );
     }
@@ -61,8 +65,8 @@ export async function PUT(
       updatedAt: new Date().toISOString(),
     };
 
-    const response = await axios.put(`${API_URL}/contacts/${id}`, updateData);
-    const contact = response.data;
+    const response = await axios.put(`${API_URL}/contacts?id=${id}`, updateData);
+    const contact = response.data?.[0];
 
     return NextResponse.json(
       { success: true, message: 'Contact updated successfully', contact },

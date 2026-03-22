@@ -42,6 +42,17 @@
       "phoneNumber": "9876543211",
       "countryCode": "+1",
       "createdAt": "2024-03-20T10:05:00Z"
+    },
+    {
+      "userId": "vikasbijjal13@gmail.com",
+      "firstName": "Guruprasad",
+      "lastName": "hadli",
+      "email": "guru@gmail.com",
+      "phoneNumber": "9876543210",
+      "countryCode": "+91",
+      "createdAt": "2026-03-22T08:22:24.755Z",
+      "id": "hr3oot5uU18"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,4 +1,5 @@
 import { ContactType, CreateContactType } from '../_types/types';
+import { getUserSession } from './session';
 
 const API_BASE_URL = '/api/contacts';
 
@@ -11,14 +12,15 @@ const API_BASE_URL = '/api/contacts';
  */
 export async function getContacts(userId: string): Promise<ContactType[]> {
   try {
+    console.log('Fetching contacts for userId:', userId);
     const response = await fetch(`${API_BASE_URL}?userId=${encodeURIComponent(userId)}`);
-
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.error || 'Failed to fetch contacts');
     }
 
     const data = await response.json();
+    console.log('Contacts fetched successfully:', data.contacts);
     return data.contacts || [];
   } catch (error) {
     console.error('Error fetching contacts:', error);
@@ -60,12 +62,14 @@ export async function updateContact(
   contact: CreateContactType
 ): Promise<ContactType> {
   try {
+    const user = await getUserSession();
+    const body = { ...contact, userId: user?.userid };
     const response = await fetch(`${API_BASE_URL}/${contactId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -84,9 +88,10 @@ export async function updateContact(
 /**
  * Delete a contact
  */
-export async function deleteContact(contactId: string, userId: string): Promise<void> {
+export async function deleteContact(contactId: string): Promise<void> {
   try {
-    const response = await fetch(`${API_BASE_URL}/${contactId}?userId=${encodeURIComponent(userId)}`, {
+    const user = await getUserSession();
+    const response = await fetch(`${API_BASE_URL}/${contactId}?userId=${encodeURIComponent(user?.userid || '')}`, {
       method: 'DELETE',
     });
 

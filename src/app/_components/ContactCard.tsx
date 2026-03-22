@@ -22,7 +22,7 @@ export default function ContactCard({ contact, onUpdate, onDelete }: ContactCard
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this contact?")) {
       try {
-        await deleteContact(contact.id, contact.userId);
+        await deleteContact(contact.id);
         onDelete(contact.id);
       } catch (error) {
         console.error("Failed to delete contact:", error);

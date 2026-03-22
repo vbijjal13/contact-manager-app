@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get('userId');
-
+    console.log('Get contacts for userId:', userId);
     if (!userId) {
       return NextResponse.json(
         { error: 'userId query parameter is required' },
@@ -17,8 +17,9 @@ export async function GET(req: Request) {
     }
 
     // Fetch contacts for the specified userId
-    const response = await axios.get(`${API_URL}/contacts?userId=${encodeURIComponent(userId)}`);
+    const response = await axios.get(`${API_URL}/contacts?userId=${decodeURIComponent(userId)}`);
     const contacts = response.data;
+    console.log('Fetched contacts:', contacts);
 
     return NextResponse.json({ success: true, contacts }, { status: 200 });
   } catch (err) {
