@@ -9,3 +9,23 @@ export type UserType = {
   userid: string;
 };
 
+/**
+ * Represents a contact in the app
+ */
+export type ContactType = {
+  id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  countryCode: string;
+  createdAt: string;
+  updatedAt?: string;
+};
+
+/**
+ * Type for creating/updating a contact (without id and timestamps)
+ */
+export type CreateContactType = Omit<ContactType, 'id' | 'createdAt' | 'updatedAt'>;
+

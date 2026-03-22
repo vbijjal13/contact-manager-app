@@ -24,14 +24,24 @@
   ],
   "contacts": [
     {
-      "id": "1",
-      "name": "Alice Johnson",
-      "email": "alice.johnson@example.com"
+      "id": "c1",
+      "userId": "1",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "email": "alice.johnson@example.com",
+      "phoneNumber": "9876543210",
+      "countryCode": "+1",
+      "createdAt": "2024-03-20T10:00:00Z"
     },
     {
-      "id": "2",
-      "name": "Bob Brown",
-      "email": "bob.brown@example.com"
+      "id": "c2",
+      "userId": "1",
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "email": "bob.brown@example.com",
+      "phoneNumber": "9876543211",
+      "countryCode": "+1",
+      "createdAt": "2024-03-20T10:05:00Z"
     }
   ]
 }
