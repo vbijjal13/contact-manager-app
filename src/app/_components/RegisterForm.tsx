@@ -112,42 +112,39 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-black text-white rounded-lg shadow-2xl p-8">
-      <h1 className="text-2xl font-semibold mb-6">Register</h1>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
         <label className="block">
-          <span className="text-sm font-medium">First name</span>
+          <span className="text-sm font-semibold text-gray-700">First name</span>
           <input
-            className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             type="text"
             name="firstName"
             value={form.firstName}
             onChange={handleChange}
-            placeholder="First name"
+            placeholder="John"
             required
           />
-          {fieldErrors.firstName && <p className="mt-1 text-sm text-red-400">{fieldErrors.firstName}</p>}
+          {fieldErrors.firstName && <p className="mt-2 text-sm text-red-600">{fieldErrors.firstName}</p>}
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium">Last name</span>
+          <span className="text-sm font-semibold text-gray-700">Last name</span>
           <input
-            className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             type="text"
             name="lastName"
             value={form.lastName}
             onChange={handleChange}
-            placeholder="Last name"
+            placeholder="Doe"
             required
           />
-          {fieldErrors.lastName && <p className="mt-1 text-sm text-red-400">{fieldErrors.lastName}</p>}
+          {fieldErrors.lastName && <p className="mt-2 text-sm text-red-600">{fieldErrors.lastName}</p>}
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium">Email</span>
+          <span className="text-sm font-semibold text-gray-700">Email</span>
           <input
-            className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             type="email"
             name="email"
             value={form.email}
@@ -155,14 +152,14 @@ const RegisterForm: React.FC = () => {
             placeholder="you@example.com"
             required
           />
-          {fieldErrors.email && <p className="mt-1 text-sm text-red-400">{fieldErrors.email}</p>}
+          {fieldErrors.email && <p className="mt-2 text-sm text-red-600">{fieldErrors.email}</p>}
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium">Password</span>
-          <div className="relative mt-1">
+          <span className="text-sm font-semibold text-gray-700">Password</span>
+          <div className="relative mt-2">
             <input
-              className="block w-full pr-10 bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+              className="block w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               type={showPassword ? "text" : "password"}
               name="password"
               value={form.password}
@@ -174,15 +171,15 @@ const RegisterForm: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute inset-y-0 right-0 pr-2 flex items-center text-white/70 hover:text-white"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
             </button>
           </div>
-          {fieldErrors.password && <p className="mt-1 text-sm text-red-400">{fieldErrors.password}</p>}
+          {fieldErrors.password && <p className="mt-2 text-sm text-red-600">{fieldErrors.password}</p>}
 
-          <ul className="mt-2 space-y-1 text-sm">
+          <ul className="mt-3 space-y-2 text-sm">
             {(() => {
               const pw = form.password || "";
               const checks = {
@@ -193,17 +190,17 @@ const RegisterForm: React.FC = () => {
               };
               return (
                 <>
-                  <li className={checks.length ? "text-green-400" : "text-red-400"}>
-                    {checks.length ? "✓" : "✕"} minimum 8 characters
+                  <li className={checks.length ? "text-green-600" : "text-gray-500"}>
+                    <span className="font-semibold">{checks.length ? "✓" : "○"}</span> Minimum 8 characters
                   </li>
-                  <li className={checks.letter ? "text-green-400" : "text-red-400"}>
-                    {checks.letter ? "✓" : "✕"} at least one letter
+                  <li className={checks.letter ? "text-green-600" : "text-gray-500"}>
+                    <span className="font-semibold">{checks.letter ? "✓" : "○"}</span> At least one letter
                   </li>
-                  <li className={checks.number ? "text-green-400" : "text-red-400"}>
-                    {checks.number ? "✓" : "✕"} at least one number
+                  <li className={checks.number ? "text-green-600" : "text-gray-500"}>
+                    <span className="font-semibold">{checks.number ? "✓" : "○"}</span> At least one number
                   </li>
-                  <li className={checks.special ? "text-green-400" : "text-red-400"}>
-                    {checks.special ? "✓" : "✕"} at least one special character
+                  <li className={checks.special ? "text-green-600" : "text-gray-500"}>
+                    <span className="font-semibold">{checks.special ? "✓" : "○"}</span> At least one special character
                   </li>
                 </>
               );
@@ -212,10 +209,10 @@ const RegisterForm: React.FC = () => {
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium">Confirm password</span>
-          <div className="relative mt-1">
+          <span className="text-sm font-semibold text-gray-700">Confirm Password</span>
+          <div className="relative mt-2">
             <input
-              className="block w-full pr-10 bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+              className="block w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               value={form.confirmPassword}
@@ -227,29 +224,28 @@ const RegisterForm: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowConfirmPassword((s) => !s)}
-              className="absolute inset-y-0 right-0 pr-2 flex items-center text-white/70 hover:text-white"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
               aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
             >
               {showConfirmPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
             </button>
           </div>
-          {fieldErrors.confirmPassword && <p className="mt-1 text-sm text-red-400">{fieldErrors.confirmPassword}</p>}
+          {fieldErrors.confirmPassword && <p className="mt-2 text-sm text-red-600">{fieldErrors.confirmPassword}</p>}
         </label>
 
-        {errorMessage && <div className="text-red-400 text-sm">{errorMessage}</div>}
-        {successMessage && <div className="text-green-400 text-sm">{successMessage}</div>}
+        {errorMessage && <div className="px-4 py-3 bg-red-50 text-red-700 rounded-lg text-sm font-medium">{errorMessage}</div>}
+        {successMessage && <div className="px-4 py-3 bg-green-50 text-green-700 rounded-lg text-sm font-medium">{successMessage}</div>}
 
         <div className="pt-4">
           <button
             type="submit"
             disabled={loading}
-            className={`w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full bg-blue-600 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-700 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </div>
       </form>
-    </div>
   );
 };
 

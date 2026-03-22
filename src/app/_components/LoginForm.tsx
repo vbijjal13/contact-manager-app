@@ -63,11 +63,11 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-     <form onSubmit={handleSubmit} className="space-y-4">
+     <form onSubmit={handleSubmit} className="space-y-5">
         <label className="block">
-          <span className="text-sm font-medium">Email</span>
+          <span className="text-sm font-semibold text-gray-700">Email</span>
           <input
-            className="mt-1 block w-full bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+            className="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             type="email"
             name="email"
             value={form.email}
@@ -78,10 +78,10 @@ const LoginForm: React.FC = () => {
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium">Password</span>
-          <div className="relative mt-1">
+          <span className="text-sm font-semibold text-gray-700">Password</span>
+          <div className="relative mt-2">
             <input
-              className="block w-full pr-10 bg-transparent border-b border-white/30 py-2 text-white placeholder:text-white/60 outline-none"
+              className="block w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               type={showPassword ? "text" : "password"}
               name="password"
               value={form.password}
@@ -93,7 +93,7 @@ const LoginForm: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute inset-y-0 right-0 pr-2 flex items-center text-white/70 hover:text-white"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
@@ -101,16 +101,16 @@ const LoginForm: React.FC = () => {
           </div>
         </label>
 
-        {errorMessage && <div className="text-red-400 text-sm">{errorMessage}</div>}
-        {successMessage && <div className="text-green-400 text-sm">{successMessage}</div>}
+        {errorMessage && <div className="px-4 py-3 bg-red-50 text-red-700 rounded-lg text-sm font-medium">{errorMessage}</div>}
+        {successMessage && <div className="px-4 py-3 bg-green-50 text-green-700 rounded-lg text-sm font-medium">{successMessage}</div>}
 
-        <div className="pt-4">
+        <div className="pt-2">
           <button
             type="submit"
             disabled={loading}
-            className={`w-full bg-white text-black rounded-md px-4 py-2 font-medium hover:opacity-95 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full bg-blue-600 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-700 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </div>
       </form>
