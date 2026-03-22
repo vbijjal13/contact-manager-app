@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 400 });
     }
 
-    const userResponse = { userid: user.userid, name: user.name, email: user.email, id: user.userid };
+    const userResponse = { id: user.id, name: user.name, email: user.email };
     
     await setUserSession(userResponse);
     const res = NextResponse.json({ success: true, user: userResponse }, { status: 200 });

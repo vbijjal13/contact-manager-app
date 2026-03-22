@@ -50,7 +50,7 @@ export default async function ContactPage() {
   // Fetch contacts for the logged-in user
   let contacts: ContactType[] = [];
   try {
-    contacts = await getContacts(user.userid);
+    contacts = await getContacts(user.id);
   } catch (error) {
     console.error('Failed to fetch contacts:', error);
     // We'll handle this in the ContactList component
@@ -116,10 +116,10 @@ export default async function ContactPage() {
             <p className="text-gray-500 mb-6">
               Start building your contact list by adding your first contact.
             </p>
-            <ContactList initialContacts={contacts} userId={user.userid} />
+            <ContactList initialContacts={contacts} userId={user.id} />
           </div>
         ) : (
-          <ContactList initialContacts={contacts} userId={user.userid} />
+          <ContactList initialContacts={contacts} userId={user.id} />
         )}
       </div>
     </div>

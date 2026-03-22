@@ -4,9 +4,9 @@
  * Represents a user in the app
  */
 export type UserType = {
+  id: string;
   name: string;
   email: string;
-  userid: string;
 };
 
 /**

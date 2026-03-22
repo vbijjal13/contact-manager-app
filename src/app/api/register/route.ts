@@ -17,19 +17,18 @@ export async function POST(req: Request) {
 
     // Create new user
     const name = `${firstName} ${lastName}`;
-    const userid = email; // Using email as userid for simplicity
     const newUser = {
       name,
       email,
-      userid,
       password, // In a real app, hash the password
+      createdAt: new Date().toISOString(),
     };
 
     const createResponse = await axios.post(`${API_URL}/users`, newUser);
     const user = createResponse.data;
 
     // Set session
-    const userResponse = { userid: user.userid, name: user.name, email: user.email };
+    const userResponse = { id: user.id, name: user.name, email: user.email };
     await setUserSession(userResponse);
 
     const res = NextResponse.json({ success: true, user: userResponse }, { status: 200 });

@@ -4,22 +4,19 @@
       "id": "1",
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "userid": "1",
       "password": "Password@123"
     },
     {
       "id": "2",
       "name": "Jane Smith",
       "email": "jane.smith@example.com",
-      "userid": "2",
       "password": "Password@123"
     },
     {
+      "id": "9bz31oieKnI",
       "name": "VIKAS BIJJAL",
       "email": "vikasbijjal13@gmail.com",
-      "userid": "vikasbijjal13@gmail.com",
-      "password": "Vikas@2001",
-      "id": "9bz31oieKnI"
+      "password": "Vikas@2001"
     }
   ],
   "contacts": [
@@ -44,7 +41,7 @@
       "createdAt": "2024-03-20T10:05:00Z"
     },
     {
-      "userId": "vikasbijjal13@gmail.com",
+      "userId": "9bz31oieKnI",
       "firstName": "vishnu",
       "lastName": "r",
       "email": "vsh.r@gmail.com",
