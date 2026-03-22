@@ -9,6 +9,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get('userId');
     console.log('Get contacts for userId:', userId);
+
     if (!userId) {
       return NextResponse.json(
         { error: 'userId query parameter is required' },
@@ -65,11 +66,12 @@ export async function POST(req: Request) {
       phoneNumber,
       countryCode,
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     const response = await axios.post(`${API_URL}/contacts`, newContact);
     const contact = response.data;
-
+    console.log('Added contact:', contact); 
     return NextResponse.json(
       { success: true, message: 'Contact added successfully', contact },
       { status: 201 }

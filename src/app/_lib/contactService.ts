@@ -1,7 +1,7 @@
 import { ContactType, CreateContactType } from '../_types/types';
 import { getUserSession } from './session';
 
-const API_BASE_URL = '/api/contacts';
+const API_BASE_URL = 'http://localhost:3000/api/contacts';
 
 /**
  * Contact Service - Utility functions for contacting with the contacts API
@@ -13,7 +13,7 @@ const API_BASE_URL = '/api/contacts';
 export async function getContacts(userId: string): Promise<ContactType[]> {
   try {
     console.log('Fetching contacts for userId:', userId);
-    const response = await fetch(`${API_BASE_URL}?userId=${encodeURIComponent(userId)}`);
+    const response = await fetch(`${API_BASE_URL}?userId=${userId}`);
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.error || 'Failed to fetch contacts');

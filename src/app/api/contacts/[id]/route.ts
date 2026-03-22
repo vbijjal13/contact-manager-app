@@ -6,11 +6,11 @@ const API_URL = process.env.API_URL || 'http://localhost:3001';
 // PUT - Update a contact by ID and userId
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
-    console.log('Updating contact with ID:', id);
+    const { id } = await params;
+    console.log('Update contact with id:', id);
     const body = await req.json();
     const { userId, firstName, lastName, email, phoneNumber, countryCode } = body;
 
@@ -33,16 +33,17 @@ export async function PUT(
       );
     }
 
+    const url = `${API_URL}/contacts/${id}`;
+    console.log('Fetching contact for update from URL:', url);
+
     // First, verify the contact exists and belongs to the user
-    const getResponse = await axios.get(`${API_URL}/contacts?id=${id}`);
-    const existingContact = getResponse.data?.[0];
+    const getResponse = await axios.get(url);
+    const existingContact = getResponse.data;
     console.log('Existing contact data:', existingContact);
 
     if (!existingContact) {
       return NextResponse.json(
-        { error: 'Contact not found',
-            existingContactData: existingContact,
-         },
+        { error: 'Contact not found' },
         { status: 404 }
       );
     }
@@ -65,9 +66,10 @@ export async function PUT(
       updatedAt: new Date().toISOString(),
     };
 
-    const response = await axios.put(`${API_URL}/contacts?id=${id}`, updateData);
-    const contact = response.data?.[0];
+    const response = await axios.put(url, updateData);
+    const contact = response.data;
 
+    console.log('Updated contact:', contact);
     return NextResponse.json(
       { success: true, message: 'Contact updated successfully', contact },
       { status: 200 }
@@ -90,10 +92,11 @@ export async function PUT(
 // DELETE - Delete a contact by ID and userId
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
+    console.log('Delete contact with id:', id);
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get('userId');
 
@@ -104,8 +107,10 @@ export async function DELETE(
       );
     }
 
+    const url = `${API_URL}/contacts/${id}`;
+    console.log('Fetching contact for deletion from URL:', url);
     // First, verify the contact exists and belongs to the user
-    const getResponse = await axios.get(`${API_URL}/contacts/${id}`);
+    const getResponse = await axios.get(url);
     const contact = getResponse.data;
 
     if (!contact) {
@@ -123,7 +128,7 @@ export async function DELETE(
     }
 
     // Delete the contact
-    await axios.delete(`${API_URL}/contacts/${id}`);
+    await axios.delete(url);
 
     return NextResponse.json(
       { success: true, message: 'Contact deleted successfully' },

@@ -4,14 +4,14 @@
       "id": "1",
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "userId": "1",
+      "userid": "1",
       "password": "Password@123"
     },
     {
       "id": "2",
       "name": "Jane Smith",
       "email": "jane.smith@example.com",
-      "userId": "2",
+      "userid": "2",
       "password": "Password@123"
     },
     {
@@ -45,13 +45,14 @@
     },
     {
       "userId": "vikasbijjal13@gmail.com",
-      "firstName": "Guruprasad",
-      "lastName": "hadli",
-      "email": "guru@gmail.com",
-      "phoneNumber": "9876543210",
+      "firstName": "vishnu",
+      "lastName": "r",
+      "email": "vsh.r@gmail.com",
+      "phoneNumber": "5153536688",
       "countryCode": "+91",
-      "createdAt": "2026-03-22T08:22:24.755Z",
-      "id": "hr3oot5uU18"
+      "createdAt": "2026-03-22T09:40:32.683Z",
+      "id": "Oh2rP5ihWzo",
+      "updatedAt": "2026-03-22T09:49:54.220Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
