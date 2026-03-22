@@ -6,6 +6,7 @@ import { deleteContact, formatFullName, formatPhone } from "../_lib/contactServi
 import { EditIcon, CopyIcon, DeleteIcon } from "./Icons";
 import EditContactModal from "./EditContactModal";
 import CopyContactModal from "./CopyContactModal";
+import Popover, { usePopover } from "./Popover";
 
 interface ContactCardProps {
   contact: ContactType;
@@ -16,6 +17,7 @@ interface ContactCardProps {
 export default function ContactCard({ contact, onUpdate, onDelete }: ContactCardProps) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCopyModal, setShowCopyModal] = useState(false);
+  const { popover, showError, hidePopover } = usePopover();
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this contact?")) {
@@ -24,7 +26,7 @@ export default function ContactCard({ contact, onUpdate, onDelete }: ContactCard
         onDelete(contact.id);
       } catch (error) {
         console.error("Failed to delete contact:", error);
-        alert("Failed to delete contact. Please try again.");
+        showError("Failed to delete contact. Please try again.");
       }
     }
   };
@@ -88,6 +90,13 @@ export default function ContactCard({ contact, onUpdate, onDelete }: ContactCard
         contact={contact}
         isOpen={showCopyModal}
         onClose={() => setShowCopyModal(false)}
+      />
+
+      <Popover
+        type={popover.type}
+        message={popover.message}
+        isVisible={popover.isVisible}
+        onClose={hidePopover}
       />
     </>
   );
