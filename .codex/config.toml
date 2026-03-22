@@ -1,0 +1,7 @@
+model = "gpt-5.4"
+reasoningEffort = "medium"
+approvalPolicy = "on-request"
+sandbox = "workspace-write"
+
+[profiles.review]
+reasoningEffort = "high"

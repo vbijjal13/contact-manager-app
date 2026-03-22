@@ -1,7 +1,7 @@
 import { ContactType, CreateContactType } from '../_types/types';
 import { getUserSession } from './session';
 
-const API_BASE_URL = 'http://localhost:3000/api/contacts';
+const API_BASE_URL = process.env.CONTACTS_API_URL || 'http://localhost:3000/api/contacts';
 
 /**
  * Contact Service - Utility functions for contacting with the contacts API

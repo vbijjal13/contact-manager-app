@@ -49,7 +49,7 @@ export default function ContactList({ initialContacts, userId }: ContactListProp
           className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition border-2 border-dashed border-gray-300 hover:border-blue-400 cursor-pointer group"
           onClick={() => setShowAddModal(true)}
         >
-          <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center">
+          <div className="flex flex-col items-center justify-center h-full min-h-50 text-center">
             <div className="mb-4 p-3 bg-blue-50 rounded-full group-hover:bg-blue-100 transition">
               <svg
                 className="h-8 w-8 text-blue-600"

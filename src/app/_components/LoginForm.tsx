@@ -34,7 +34,8 @@ const LoginForm: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/login', {
+      const LOGIN_URL = process.env.LOGIN_URL || '/api/login';
+      const res = await fetch(LOGIN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: form.email, password: form.password }),
