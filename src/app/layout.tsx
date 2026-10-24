@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Contact Manager - Manage Your Contacts Easily",
   description: "Organize and manage all your contacts securely in one place. Easy-to-use contact manager with search, filter, and backup features.",
